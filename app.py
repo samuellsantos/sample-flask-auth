@@ -1,12 +1,14 @@
 from flask import Flask
-from flask_sqlalchemy import sqlalchemy
+from database import db
+from models.user import User
 
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "your_secret_key"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://database.db"
-db = sqlalchemy(app)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+
+db.init_app(app)
 
 @app.route("/hello-world", methods=["GET"])
 def Hello_world():
